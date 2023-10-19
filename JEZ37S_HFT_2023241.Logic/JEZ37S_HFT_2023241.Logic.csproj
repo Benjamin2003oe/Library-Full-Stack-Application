@@ -1,8 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JEZ37S_HFT_2023241.Models\JEZ37S_HFT_2023241.Models.csproj" />
+    <ProjectReference Include="..\JEZ37S_HFT_2023241.Repository\JEZ37S_HFT_2023241.Repository.csproj" />
+  </ItemGroup>
 
 </Project>
