@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JEZ37S_HFT_2023241.Repository.DataBase;
+using System;
 
 namespace JEZ37S_HFT_2023241.Repository
 {
@@ -6,7 +7,13 @@ namespace JEZ37S_HFT_2023241.Repository
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            LibraryDbContext test = new LibraryDbContext();
+            foreach (var item in test.Books)
+            {
+                Console.WriteLine(item.Name + " -- "+ item.Author.Name+" -- "+item.Reservation.MemberName);
+                
+            }
+            Console.ReadLine();
         }
     }
 }

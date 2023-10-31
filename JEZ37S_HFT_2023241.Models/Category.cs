@@ -16,5 +16,19 @@ namespace JEZ37S_HFT_2023241.Models
         [StringLength(100)]
         public string Category_Name { get; set; }
         public bool UnderAgeContent { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
+
+
+        public Category(int id, string category_name, bool underagecontent)
+        {
+            Id = id;
+            Category_Name = category_name;
+            UnderAgeContent = underagecontent;
+            Books = new HashSet<Book>();
+        }
+        public Category()
+        {
+            Books = new HashSet<Book>();
+        }
     }
 }
