@@ -13,10 +13,19 @@ namespace JEZ37S_HFT_2023241.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [ForeignKey(nameof(Book))]
-        public int Book_id { get; set; }
+
         [StringLength(100)]
         public string Name { get; set; }
         public int YearOfBirth { get; set; }
+        public Author(int id,string name, int yearofbirth)
+        {
+            Id = id;
+            Name = name;
+            YearOfBirth = yearofbirth;
+        }
+        public Author()
+        {
+            
+        }
     }
 }
