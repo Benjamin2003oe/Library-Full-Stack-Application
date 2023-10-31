@@ -83,6 +83,26 @@ namespace JEZ37S_HFT_2023241.Repository.DataBase
                 new Reservation(10,"Kovács Antal",1),
 
             });
+            modelBuilder.Entity<Book>(book => book
+            .HasOne(book => book.Category)
+            .WithMany(category => category.Books)
+            .HasForeignKey(book => book.Category_id)
+            .OnDelete(DeleteBehavior.Cascade));
+            modelBuilder.Entity<Category>().HasData(new Category[]
+            {
+                new Category(1,"Történelmi regény",false),
+                new Category(2,"Fantasy", false),
+                new Category(3,"Szépirodalom", false),
+                new Category(4,"Sci-fi",true),
+                new Category(5,"Történelmi regény", false),
+                new Category(6,"Thriller",true),
+                new Category(7,"Filozófiai regény", false),
+                new Category(8,"Fantázia",false),
+                new Category(9,"Spirituális",true),
+                new Category(10,"Thriller", true),
+
+
+            });
         }
     }
 }
