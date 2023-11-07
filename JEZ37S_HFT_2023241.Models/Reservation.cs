@@ -18,6 +18,7 @@ namespace JEZ37S_HFT_2023241.Models
         [StringLength(100)]
         public string MemberName { get; set; }
         public int ReservationDays { get; set; }
+        [NotMapped]
         public virtual ICollection<Book> Books { get; set; }
 
         public Reservation(int id,string memberName, int reservationDays)

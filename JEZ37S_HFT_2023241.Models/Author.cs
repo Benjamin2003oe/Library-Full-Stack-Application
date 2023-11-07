@@ -18,6 +18,7 @@ namespace JEZ37S_HFT_2023241.Models
         [StringLength(100)]
         public string Name { get; set; }
         public int YearOfBirth { get; set; }
+        [NotMapped]
         public virtual ICollection<Book> Books { get; set; }
 
         public Author(int id,string name, int yearofbirth)

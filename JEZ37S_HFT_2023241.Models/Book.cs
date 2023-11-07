@@ -24,8 +24,11 @@ namespace JEZ37S_HFT_2023241.Models
         [StringLength(100)]
         public string Name { get; set; }
         public int Publication_year { get; set; }
+        [NotMapped]
         public virtual ICollection<Author> Authors { get; set; }
+        [NotMapped]
         public virtual ICollection<Reservation> Reservations { get; set; }
+        [NotMapped]
         public virtual ICollection<Category> Categories { get; set; }
 
         public virtual Author Author { get; set; }

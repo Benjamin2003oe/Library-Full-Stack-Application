@@ -16,6 +16,7 @@ namespace JEZ37S_HFT_2023241.Models
         [StringLength(100)]
         public string Category_Name { get; set; }
         public bool UnderAgeContent { get; set; }
+        [NotMapped]
         public virtual ICollection<Book> Books { get; set; }
 
 
