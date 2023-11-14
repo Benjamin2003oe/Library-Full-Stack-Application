@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace JEZ37S_HFT_2023241.Repository.ModelRepositories
 {
-    internal class CategoryRepository : Repository<Category>, IRepository<Category>
+    public class CategoryRepository : Repository<Category>, IRepository<Category>
     {
         public CategoryRepository(LibraryDbContext ctx) : base(ctx)
         {

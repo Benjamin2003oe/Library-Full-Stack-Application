@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace JEZ37S_HFT_2023241.Repository.ModelRepositories
 {
-    internal class AuthorRepository : Repository<Author>, IRepository<Author>
+    public class AuthorRepository : Repository<Author>, IRepository<Author>
     {
         public AuthorRepository(LibraryDbContext ctx) : base(ctx)
         {

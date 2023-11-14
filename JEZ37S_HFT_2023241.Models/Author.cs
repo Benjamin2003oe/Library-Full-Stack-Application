@@ -21,6 +21,36 @@ namespace JEZ37S_HFT_2023241.Models
         [NotMapped]
         public virtual ICollection<Book> Books { get; set; }
 
+        public class BooksWrittenbyAuthor
+        {
+            public BooksWrittenbyAuthor()
+            {
+
+            }
+            public int count { get; set; }
+
+            public override string ToString()
+            {
+                return $"{count}";
+            }
+
+            public override bool Equals(object obj)
+            {
+                BooksWrittenbyAuthor b = obj as BooksWrittenbyAuthor;
+                if (b == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.count == b.count;
+                }
+            }
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(this.count);
+            }
+        }
         public Author(int id,string name, int yearofbirth)
         {
             Id = id;

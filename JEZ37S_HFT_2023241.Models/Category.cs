@@ -31,5 +31,35 @@ namespace JEZ37S_HFT_2023241.Models
         {
             Books = new HashSet<Book>();
         }
+
+        public class HowManyBooksPerCategory
+        {
+            public HowManyBooksPerCategory()
+            {
+
+            }
+            public int count { get; set; }
+            public override string ToString()
+            {
+                return $"{count}";
+            }
+
+            public override bool Equals(object obj)
+            {
+                HowManyBooksPerCategory b = obj as HowManyBooksPerCategory;
+                if (b == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.count == b.count;
+                }
+            }
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(this.count);
+            }
+        }
     }
 }

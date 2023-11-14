@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace JEZ37S_HFT_2023241.Repository.ModelRepositories
 {
-    internal class ReservationRepository : Repository<Reservation>, IRepository<Reservation>
+    public class ReservationRepository : Repository<Reservation>, IRepository<Reservation>
     {
         public ReservationRepository(LibraryDbContext ctx) : base(ctx)
         {

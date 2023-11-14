@@ -50,5 +50,66 @@ namespace JEZ37S_HFT_2023241.Models
 
         }
 
+        public class WhoReservedThisBook
+        {
+            public WhoReservedThisBook()
+            {
+                
+            }
+            public string membername { get; set; }
+
+            public override string ToString()
+            {
+                return $"{membername}";
+            }
+
+            public override bool Equals(object obj)
+            {
+                WhoReservedThisBook b = obj as WhoReservedThisBook;
+                if (b == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.membername == b.membername;
+                }
+            }
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(this.membername);
+            }
+        }
+
+        public class AuthorsBornYear
+        {
+            public AuthorsBornYear()
+            {
+
+            }
+            public double year { get; set; }
+            public override string ToString()
+            {
+                return $"{year}";
+            }
+
+            public override bool Equals(object obj)
+            {
+                AuthorsBornYear b = obj as AuthorsBornYear;
+                if (b == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.year == b.year;
+                }
+            }
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(this.year);
+            }
+        }
+
     }
 }
