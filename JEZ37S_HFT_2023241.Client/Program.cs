@@ -22,6 +22,9 @@ namespace JEZ37S_HFT_2023241.Client
             var auth = new AuthorRepository(ctx);
             var authlogic = new AuthorLogic(auth);
 
+            var reser = new ReservationRepository(ctx);
+            var reserlogic = new ReservationLogic(reser);
+
 
             Book b = new Book()
             {
@@ -42,6 +45,8 @@ namespace JEZ37S_HFT_2023241.Client
             var nc4 = boologic.Reservedby("A lány a vonaton");
             //Mukodik
             var nc5 = authlogic.GetAuthorBooks("J.K. Rowling");
+            //Mukodik
+            var nc6 = reserlogic.HowManyBooksHasBeenReserved("Kovács Antal");
             ;
         }
     }

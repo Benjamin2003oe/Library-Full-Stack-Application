@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static JEZ37S_HFT_2023241.Models.Category;
+using static JEZ37S_HFT_2023241.Models.Reservation;
 
 namespace JEZ37S_HFT_2023241.Logic.Logics
 {
@@ -50,6 +52,17 @@ namespace JEZ37S_HFT_2023241.Logic.Logics
         public void Update(Reservation item)
         {
             this.repo.Update(item);
+        }
+        public IEnumerable<BooksReservedby> HowManyBooksHasBeenReserved(string membername)
+        {
+            return ReadAll()
+                .Where(t => t.MemberName == membername)
+                .GroupBy(t=>t.MemberName)
+                .Select(t => new BooksReservedby()
+                {
+                    count = t.Count()
+                });
+
         }
 
     }
