@@ -60,7 +60,7 @@ namespace JEZ37S_HFT_2023241.Logic.Logics
                 .GroupBy(t=>t.MemberName)
                 .Select(t => new BooksReservedby()
                 {
-                    count = t.Count()
+                    count = t.Count()                   
                 });
 
         }
