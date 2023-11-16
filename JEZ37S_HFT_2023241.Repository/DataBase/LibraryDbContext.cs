@@ -43,12 +43,12 @@ namespace JEZ37S_HFT_2023241.Repository.DataBase
                 new Book(2,2,2,2,"A lány a vonaton",2015),
                 new Book(3,3,3,3,"Az Alapítvány",1951),
                 new Book(4,4,4,4,"A Marsi",2011),
-                new Book(5,5,1,5,"Stolz és szépség",1813),
-                new Book(6,6,4,6,"Az örökkévalóság nyára",2012),
+                new Book(5,5,5,5,"Stolz és szépség",1813),
+                new Book(6,6,6,6,"Az örökkévalóság nyára",2012),
                 new Book(7,7,7,7,"A Hattyúk tava",2007),
                 new Book(8,8,8,8,"A Bíró kutyája",1994),
                 new Book(9,9,9,9,"Harry Potter és a bölcsek köve",1997),
-                new Book(10,10,4,10,"Trónok harca",1996),
+                new Book(10,10,10,10,"Trónok harca",1996),
             });
             modelBuilder.Entity<Author>().HasData(new Author[]
             {

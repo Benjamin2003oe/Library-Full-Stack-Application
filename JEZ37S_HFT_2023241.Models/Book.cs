@@ -87,7 +87,7 @@ namespace JEZ37S_HFT_2023241.Models
             {
 
             }
-            public double year { get; set; }
+            public int year { get; set; }
             public override string ToString()
             {
                 return $"{year}";

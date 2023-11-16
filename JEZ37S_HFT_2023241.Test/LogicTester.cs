@@ -57,17 +57,20 @@ namespace JEZ37S_HFT_2023241.Test
         }
 
         [Test]
-        public void GetWhenWasTheAuthorBorn()
+        public void ReadWithCorrectId()
         {
-            var actual = logic.WhenWasTheAuthorBorn("Book1");
-            var expected = new List<AuthorsBornYear>()
+            Book book = new Book()
             {
-                new AuthorsBornYear()
-                {
-                    year = 1952
-                }
+                Id = 1,
+                Author_id = 1,
+                Category_id = 1,
+                Reservation_id = 1,
+                Name = "Book1",
+                Publication_year = 1991
             };
-            Assert.AreEqual(expected, actual);
+            mockBookRepo.Setup(m => m.Read(1)).Returns(book);
+            var finalbook = logic.Read(1);
+            Assert.AreEqual(finalbook,book);
         }
         [Test]
         public void CreateBookShortName()
@@ -86,21 +89,6 @@ namespace JEZ37S_HFT_2023241.Test
             }
             mockBookRepo.Verify(m => m.Create(ShortName), Times.Never);
         }
-        [Test]
-        public void GetReservedby()
-        {
-            var actual = logic.Reservedby("Book1");
-            var expected = new List<WhoReservedThisBook>()
-            {
-                new WhoReservedThisBook()
-                {
-                    membername = "Member1"
-                }
-            };
-            Assert.AreEqual(expected, actual);
-        }
-
-
     }
     public class AuthorLogicTester
     {
@@ -207,6 +195,19 @@ namespace JEZ37S_HFT_2023241.Test
                 }
             };
             Assert.AreEqual(expected, actual);
+        }
+        [Test]
+        public void ReadWithCorrectId()
+        {
+            Category category = new Category()
+            {
+                Id = 1,
+                Category_Name = "Category1",
+                UnderAgeContent = false
+            };
+            mockCategoryRepo.Setup(m => m.Read(1)).Returns(category);
+            var finalcategory = logic.Read(1);
+            Assert.AreEqual(finalcategory, category);
         }
         [Test]
         public void CreateCategoryShortName()

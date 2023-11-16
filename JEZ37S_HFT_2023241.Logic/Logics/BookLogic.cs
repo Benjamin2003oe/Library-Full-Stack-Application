@@ -58,17 +58,18 @@ namespace JEZ37S_HFT_2023241.Logic.Logics
         {
             return ReadAll()
                 .Where(t => t.Name == bookname)
-                .SelectMany(t => t.Authors)
+                .Select(t => t.Author)
                 .Select(t => new AuthorsBornYear()
                 {
                     year = t.YearOfBirth
+
                 });
         }
         public IEnumerable<WhoReservedThisBook> Reservedby(string bookname)
         {
             return ReadAll()
                 .Where(t => t.Name == bookname)
-                .SelectMany(t=>t.Reservations)
+                .Select(t=>t.Reservation)
                 .Select(t=>new WhoReservedThisBook()
                 { 
                     membername = t.MemberName
