@@ -31,7 +31,7 @@ namespace JEZ37S_HFT_2023241.Logic.Logics
 
         public void Delete(int id)
         {
-            repo.Delete(id);
+            this.repo.Delete(id);
         }
 
         public Book Read(int id)
@@ -46,19 +46,19 @@ namespace JEZ37S_HFT_2023241.Logic.Logics
 
         public IQueryable<Book> ReadAll()
         {
-            return repo.ReadAll();
+            return this.repo.ReadAll();
         }
 
         public void Update(Book item)
         {
-            repo.Update(item);
+            this.repo.Update(item);
         }
 
         public IEnumerable<AuthorsBornYear> WhenWasTheAuthorBorn(string bookname)
         {
             return ReadAll()
                 .Where(t => t.Name == bookname)
-                .Select(t => t.Author)
+                .SelectMany(t => t.Authors)
                 .Select(t => new AuthorsBornYear()
                 {
                     year = t.YearOfBirth
@@ -68,7 +68,7 @@ namespace JEZ37S_HFT_2023241.Logic.Logics
         {
             return ReadAll()
                 .Where(t => t.Name == bookname)
-                .Select(t=>t.Reservation)
+                .SelectMany(t=>t.Reservations)
                 .Select(t=>new WhoReservedThisBook()
                 { 
                     membername = t.MemberName
