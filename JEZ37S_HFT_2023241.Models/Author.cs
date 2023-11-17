@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace JEZ37S_HFT_2023241.Models
@@ -19,6 +20,7 @@ namespace JEZ37S_HFT_2023241.Models
         public string Name { get; set; }
         public int YearOfBirth { get; set; }
         [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<Book> Books { get; set; }
 
         public class BooksWrittenbyAuthor

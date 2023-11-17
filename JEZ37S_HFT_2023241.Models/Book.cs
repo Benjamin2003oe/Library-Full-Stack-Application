@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using static System.Reflection.Metadata.BlobBuilder;
 
@@ -27,6 +28,7 @@ namespace JEZ37S_HFT_2023241.Models
         [NotMapped]
         public virtual ICollection<Author> Authors { get; set; }
         [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<Reservation> Reservations { get; set; }
         [NotMapped]
         public virtual ICollection<Category> Categories { get; set; }

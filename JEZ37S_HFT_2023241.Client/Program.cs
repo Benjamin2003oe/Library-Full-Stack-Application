@@ -1,8 +1,5 @@
 ﻿using ConsoleTools;
-using JEZ37S_HFT_2023241.Logic.Logics;
 using JEZ37S_HFT_2023241.Models;
-using JEZ37S_HFT_2023241.Repository.DataBase;
-using JEZ37S_HFT_2023241.Repository.ModelRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,30 +9,16 @@ namespace JEZ37S_HFT_2023241.Client
 {
     internal class Program
     {
-        static BookLogic booklogic;
-        static AuthorLogic authorlogic;
-        static CategoryLogic categorylogic;
-        static ReservationLogic reservationlogic;
+        static RestService rest;
         static void Main(string[] args)
         {
-            var ctx = new LibraryDbContext();
+            rest = new RestService("http://localhost:13009/","book");
 
-            var boo = new BookRepository(ctx);
-            var cate = new CategoryRepository(ctx);
-            var auth = new AuthorRepository(ctx);
-            var reser = new ReservationRepository(ctx);
-
-            booklogic = new BookLogic(boo);
-            categorylogic = new CategoryLogic(cate);
-            authorlogic = new AuthorLogic(auth);
-            reservationlogic = new ReservationLogic(reser);
-
-            var nc2 = categorylogic.CountBooksPerCategory("Történelmi regény");
-            var nc3 = booklogic.WhenWasTheAuthorBorn("Harry Potter és a bölcsek köve");
-            var nc4 = booklogic.Reservedby("A lány a vonaton");
-            var nc5 = authorlogic.GetAuthorBooks("J.K. Rowling");
-            var nc6 = reservationlogic.HowManyBooksHasBeenReserved("Kovács Antal");
-            ;           
+            //var nc2 = categorylogic.CountBooksPerCategory("Történelmi regény");
+            //var nc3 = booklogic.WhenWasTheAuthorBorn("Harry Potter és a bölcsek köve");
+            //var nc4 = booklogic.Reservedby("A lány a vonaton");
+            //var nc5 = authorlogic.GetAuthorBooks("J.K. Rowling");
+            //var nc6 = reservationlogic.HowManyBooksHasBeenReserved("Kovács Antal");       
 
             var reservationSubMenu = new ConsoleMenu(args, level: 1)
                .Add("List", () => List("Reservation"))
@@ -79,53 +62,61 @@ namespace JEZ37S_HFT_2023241.Client
         {
             if (entity == "Book")
             {
-                Console.Write("Add meg a könyv nevét: ");
-                string name = Console.ReadLine();
-                Console.Write("Add meg a könyv kiadási évét: ");
-                int year = int.Parse(Console.ReadLine());
-                Book newBook = new Book()
-                {
-                    Name = name,
-                    Publication_year = year,
-                };
-                booklogic.Create(newBook);
+                Console.Write("Enter book title: ");
+                string title = Console.ReadLine();
+                rest.Post(new Book() { Name = title }, "book");
             }
-            Console.ReadLine();
+            else if (entity == "Author")
+            {
+                Console.Write("Enter author name: ");
+                string name = Console.ReadLine();
+                rest.Post(new Author() { Name = name }, "author");
+            }
+            else if (entity == "Category")
+            {
+                Console.Write("Enter category name: ");
+                string name = Console.ReadLine();
+                rest.Post(new Category() { Category_Name = name }, "category");
+            }
+            else if (entity == "Reservation")
+            {
+                Console.Write("Enter reservation member name: ");
+                string name = Console.ReadLine();
+                Console.Write("Enter reservation days: ");
+                int days = int.Parse(Console.ReadLine());
+                rest.Post(new Reservation() { MemberName = name,ReservationDays = days }, "reservation");
+            }
         }
         static void List(string entity)
         {
             if (entity == "Book")
             {
-                var items = booklogic.ReadAll();
-                Console.WriteLine("Id" + "\t" + "Name");
-                foreach (var item in items)
+                List<Book> books = rest.Get<Book>("book");
+                foreach (var item in books)
                 {
-                    Console.WriteLine(item.Id + "\t" + item.Name);
+                    Console.WriteLine(item.Id + "\t" +item.Name);
                 }
             }
             else if (entity == "Author")
             {
-                var items = authorlogic.ReadAll();
-                Console.WriteLine("Id" + "\t" + "Name");
-                foreach (var item in items)
+                List<Author> authors = rest.Get<Author>("author");
+                foreach (var item in authors)
                 {
                     Console.WriteLine(item.Id + "\t" + item.Name);
                 }
             }
             else if (entity == "Category")
             {
-                var items = categorylogic.ReadAll();
-                Console.WriteLine("Id" + "\t" + "Name");
-                foreach (var item in items)
+                List<Category> categories = rest.Get<Category>("category");
+                foreach (var item in categories)
                 {
                     Console.WriteLine(item.Id + "\t" + item.Category_Name);
                 }
             }
             else if (entity == "Reservation")
             {
-                var items = reservationlogic.ReadAll();
-                Console.WriteLine("Id" + "\t" + "Name");
-                foreach (var item in items)
+                List<Reservation> reservations = rest.Get<Reservation>("reservation");
+                foreach (var item in reservations)
                 {
                     Console.WriteLine(item.Id + "\t" + item.MemberName);
                 }
@@ -134,13 +125,73 @@ namespace JEZ37S_HFT_2023241.Client
         }
         static void Update(string entity)
         {
-            Console.WriteLine(entity + " update");
-            Console.ReadLine();
+            if (entity == "Book")
+            {
+                Console.Write("Enter book's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Book one = rest.Get<Book>(id, "book");
+                Console.Write($"New name [old: {one.Name}]: ");
+                string name = Console.ReadLine();
+                one.Name = name;
+                rest.Put(one, "book");
+            }
+            else if (entity == "Author")
+            {
+                Console.Write("Enter author's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Author one = rest.Get<Author>(id, "author");
+                Console.Write($"New name [old: {one.Name}]: ");
+                string name = Console.ReadLine();
+                one.Name = name;
+                rest.Put(one, "author");
+            }
+            else if (entity == "Category")
+            {
+                Console.Write("Enter category's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Category one = rest.Get<Category>(id, "category");
+                Console.Write($"New name [old: {one.Category_Name}]: ");
+                string name = Console.ReadLine();
+                one.Category_Name = name;
+                rest.Put(one, "category");
+            }
+            else if (entity == "Reservation")
+            {
+                Console.Write("Enter reservation's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Reservation one = rest.Get<Reservation>(id, "reservation");
+                Console.Write($"New name [old: {one.MemberName}]: ");
+                string name = Console.ReadLine();
+                one.MemberName = name;
+                rest.Put(one, "reservation");
+            }
         }
         static void Delete(string entity)
         {
-            Console.WriteLine(entity + " delete");
-            Console.ReadLine();
+            if (entity == "Book")
+            {
+                Console.Write("Enter book's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "book");
+            }
+            else if (entity == "Author")
+            {
+                Console.Write("Enter author's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "author");
+            }
+            else if (entity == "Category")
+            {
+                Console.Write("Enter category's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "category");
+            }
+            else if (entity == "Reservation")
+            {
+                Console.Write("Enter reservation's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "reservation");
+            }
         }
     }
 }
