@@ -12,13 +12,7 @@ namespace JEZ37S_HFT_2023241.Client
         static RestService rest;
         static void Main(string[] args)
         {
-            rest = new RestService("http://localhost:13009/","book");
-
-            //var nc2 = categorylogic.CountBooksPerCategory("Történelmi regény");
-            //var nc3 = booklogic.WhenWasTheAuthorBorn("Harry Potter és a bölcsek köve");
-            //var nc4 = booklogic.Reservedby("A lány a vonaton");
-            //var nc5 = authorlogic.GetAuthorBooks("J.K. Rowling");
-            //var nc6 = reservationlogic.HowManyBooksHasBeenReserved("Kovács Antal");       
+            rest = new RestService("http://localhost:13009/","book");   
 
             var reservationSubMenu = new ConsoleMenu(args, level: 1)
                .Add("List", () => List("Reservation"))
