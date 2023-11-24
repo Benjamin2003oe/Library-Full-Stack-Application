@@ -4,6 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using static JEZ37S_HFT_2023241.Models.Author;
+using static JEZ37S_HFT_2023241.Models.Book;
+using static JEZ37S_HFT_2023241.Models.Category;
+using static JEZ37S_HFT_2023241.Models.Reservation;
 
 namespace JEZ37S_HFT_2023241.Client
 {
@@ -19,6 +23,7 @@ namespace JEZ37S_HFT_2023241.Client
                .Add("Create", () => Create("Reservation"))
                .Add("Delete", () => Delete("Reservation"))
                .Add("Update", () => Update("Reservation"))
+               .Add("HowManyBooksHasBeenReserved", () => HowManyBooksHasBeenReserved())
                .Add("Exit", ConsoleMenu.Close);
 
             var categorySubMenu = new ConsoleMenu(args, level: 1)
@@ -26,6 +31,7 @@ namespace JEZ37S_HFT_2023241.Client
                .Add("Create", () => Create("Category"))
                .Add("Delete", () => Delete("Category"))
                .Add("Update", () => Update("Category"))
+               .Add("CountBooksPerCategory", () => CountBooksPerCategory())
                .Add("Exit", ConsoleMenu.Close);
 
             var authorSubMenu = new ConsoleMenu(args, level: 1)
@@ -33,6 +39,7 @@ namespace JEZ37S_HFT_2023241.Client
                 .Add("Create", () => Create("Author"))
                 .Add("Delete", () => Delete("Author"))
                 .Add("Update", () => Update("Author"))
+                .Add("GetAuthorBooks", () => GetAuthorBooks())
                 .Add("Exit", ConsoleMenu.Close);
 
             var bookSubMenu = new ConsoleMenu(args, level: 1)
@@ -40,6 +47,8 @@ namespace JEZ37S_HFT_2023241.Client
                 .Add("Create", () => Create("Book"))
                 .Add("Delete", () => Delete("Book"))
                 .Add("Update", () => Update("Book"))
+                .Add("WhenWasTheAuthorBorn", () => WhenWasTheAuthorBorn())
+                .Add("Reservedby", () => Reservedby())
                 .Add("Exit", ConsoleMenu.Close);
 
             var menu = new ConsoleMenu(args, level: 0)
@@ -187,5 +196,65 @@ namespace JEZ37S_HFT_2023241.Client
                 rest.Delete(id, "reservation");
             }
         }
+        static void GetAuthorBooks()
+        {
+            Console.Write("Enter the name of the chosen author: ");
+            string name = Console.ReadLine();
+            List<BooksWrittenbyAuthor> list = rest.Get<BooksWrittenbyAuthor>(name, "Stat/GetAuthorBooks");
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadLine();
+        }
+        static void WhenWasTheAuthorBorn()
+        {
+            Console.Write("Enter the name of the chosen book: ");
+            string name = Console.ReadLine();
+            List<AuthorsBornYear> list = rest.Get<AuthorsBornYear>(name, "Stat/WhenWasTheAuthorBorn");
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadLine();
+        }
+        static void Reservedby()
+        {
+            Console.Write("Enter the name of the chosen book: ");
+            string name = Console.ReadLine();
+            List<WhoReservedThisBook> list = rest.Get<WhoReservedThisBook>(name, "Stat/Reservedby");
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadLine();
+        }
+        static void CountBooksPerCategory()
+        {
+            Console.Write("Enter the name of the chosen category: ");
+            string name = Console.ReadLine();
+            List<HowManyBooksPerCategory> list = rest.Get<HowManyBooksPerCategory>(name, "Stat/CountBooksPerCategory");
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadLine();
+        }
+        static void HowManyBooksHasBeenReserved()
+        {
+            Console.Write("Enter the name of the chosen member: ");
+            string name = Console.ReadLine();
+            List<BooksReservedby> list = rest.Get<BooksReservedby>(name, "Stat/HowManyBooksHasBeenReserved");
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadLine();
+
+        }
+
+
+
+
     }
 }

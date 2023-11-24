@@ -58,11 +58,12 @@ namespace JEZ37S_HFT_2023241.Logic.Logics
         public IEnumerable<BooksWrittenbyAuthor> GetAuthorBooks(string author)
         {
             return ReadAll()
-                .Where(t => t.Name == author)
-                .GroupBy(t => t.Name)
+                .Where(t => t.Name.Equals(author))
+                .SelectMany(t=>t.Books)
+                .Where(t => t.Author.Name.Equals(author))
                 .Select(t => new BooksWrittenbyAuthor()
                 {
-                    count = t.Count()
+                    name = t.Name
                 }); ;
         } 
 

@@ -29,11 +29,11 @@ namespace JEZ37S_HFT_2023241.Models
             {
 
             }
-            public int count { get; set; }
+            public string name { get; set; }
 
             public override string ToString()
             {
-                return $"{count}";
+                return $"{name}";
             }
 
             public override bool Equals(object obj)
@@ -45,12 +45,12 @@ namespace JEZ37S_HFT_2023241.Models
                 }
                 else
                 {
-                    return this.count == b.count;
+                    return this.name == b.name;
                 }
             }
             public override int GetHashCode()
             {
-                return HashCode.Combine(this.count);
+                return HashCode.Combine(this.name);
             }
         }
         public Author(int id,string name, int yearofbirth)

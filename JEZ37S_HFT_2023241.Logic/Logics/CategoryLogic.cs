@@ -58,10 +58,11 @@ namespace JEZ37S_HFT_2023241.Logic.Logics
         {
             return ReadAll()
                 .Where(t => t.Category_Name == category)
-                .GroupBy(t => t.Category_Name)
+                .SelectMany(t=>t.Books)
+                .Where(t => t.Category.Category_Name.Equals(category))
                 .Select(t => new HowManyBooksPerCategory()
                 {
-                    count = t.Count()
+                    name = t.Name
                 }) ;
 
         }

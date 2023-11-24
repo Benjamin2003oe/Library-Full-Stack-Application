@@ -2,6 +2,7 @@
 using JEZ37S_HFT_2023241.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using static JEZ37S_HFT_2023241.Models.Book;
 
 namespace JEZ37S_HFT_2023241.Endpoint.Controllers
 {
@@ -46,5 +47,6 @@ namespace JEZ37S_HFT_2023241.Endpoint.Controllers
         {
             this.Logic.Delete(id);
         }
+
     }
 }

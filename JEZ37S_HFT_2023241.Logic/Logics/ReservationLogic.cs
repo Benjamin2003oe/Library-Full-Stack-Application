@@ -56,8 +56,9 @@ namespace JEZ37S_HFT_2023241.Logic.Logics
         public IEnumerable<BooksReservedby> HowManyBooksHasBeenReserved(string membername)
         {
             return ReadAll()
-                .Where(t => t.MemberName == membername)
-                .GroupBy(t=>t.MemberName)
+                .SelectMany(t=>t.Books)
+                .Where(t => t.Reservation.MemberName == membername)
+                .GroupBy(t=>t.Reservation.MemberName)
                 .Select(t => new BooksReservedby()
                 {
                     count = t.Count()                   

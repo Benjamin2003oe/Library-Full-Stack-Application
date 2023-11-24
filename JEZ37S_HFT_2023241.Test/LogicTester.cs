@@ -89,6 +89,7 @@ namespace JEZ37S_HFT_2023241.Test
             }
             mockBookRepo.Verify(m => m.Create(ShortName), Times.Never);
         }
+
     }
     public class AuthorLogicTester
     {
@@ -114,7 +115,13 @@ namespace JEZ37S_HFT_2023241.Test
                             Reservation_id=1,
                             Author_id =1,
                             Name="Book1",
-                            Publication_year=1991
+                            Publication_year=1991,
+                            Author = new Author()  
+                            {
+                                Id = 1,
+                                Name = "Author1",
+                                YearOfBirth = 1952,
+                            }
                         }
                     }
                 }
@@ -129,7 +136,7 @@ namespace JEZ37S_HFT_2023241.Test
             {
                 new BooksWrittenbyAuthor()
                 {
-                    count = 1
+                    name = "Book1"
                 }
             };
             Assert.AreEqual(expected, actual);
@@ -162,24 +169,32 @@ namespace JEZ37S_HFT_2023241.Test
             mockCategoryRepo = new Mock<IRepository<Category>>();
             mockCategoryRepo.Setup(m => m.ReadAll()).Returns(new List<Category>()
             {
+
                 new Category()
                 {
-                    Id=1,
-                    Category_Name="Category1",
+                    Id = 1,
+                    Category_Name = "Category1",
                     UnderAgeContent = true,
-                    Books= new List<Book>()
+                    Books = new List<Book>()
                     {
                         new Book()
                         {
-                            Id=1,
-                            Category_id=1,
-                            Reservation_id=1,
-                            Author_id =1,
-                            Name="Book1",
-                            Publication_year=1991
-                        }
+                             Id = 1,
+                             Category_id = 1,
+                             Reservation_id = 1,
+                             Author_id = 1,
+                             Name = "Book1",
+                             Publication_year = 1991,
+                             Category = new Category()  
+                             {
+                                 Id = 1,
+                                 Category_Name = "Category1",
+                                 UnderAgeContent = true,
+                             }
+                        },
                     }
                 }
+
             }.AsQueryable()); ;
             logic = new CategoryLogic(mockCategoryRepo.Object);
         }
@@ -191,7 +206,7 @@ namespace JEZ37S_HFT_2023241.Test
             {
                 new HowManyBooksPerCategory()
                 {
-                    count = 1
+                    name = "Book1"
                 }
             };
             Assert.AreEqual(expected, actual);
@@ -246,25 +261,31 @@ namespace JEZ37S_HFT_2023241.Test
         {
             mockReservationRepo = new Mock<IRepository<Reservation>>();
             mockReservationRepo.Setup(m => m.ReadAll()).Returns(new List<Reservation>()
-            { 
+            {
                 new Reservation()
                 {
-                    Id=1,
-                    MemberName="Member1",
+                    Id = 1,
+                    MemberName = "Member1",
                     ReservationDays = 1,
-                    Books= new List<Book>()
+                    Books = new List<Book>()
                     {
-                        new Book()
-                        {
-                            Id=1,
-                            Category_id=1,
-                            Reservation_id=1,
-                            Author_id =1,
-                            Name="Book1",
-                            Publication_year=1991
-                        }
+                         new Book()
+                         {
+                              Id = 1,
+                              Category_id = 1,
+                              Reservation_id = 1,
+                              Author_id = 1,
+                              Name = "Book1",
+                              Publication_year = 1991,
+                              Reservation = new Reservation()  
+                              {
+                                  Id = 1,
+                                  MemberName = "Member1",
+                                  ReservationDays = 1,
+                              }
+                         }
                     }
-                }
+                },
             }.AsQueryable()); ;
             logic = new ReservationLogic(mockReservationRepo.Object);
         }
@@ -299,5 +320,6 @@ namespace JEZ37S_HFT_2023241.Test
             mockReservationRepo.Verify(m => m.Create(ShortReservation), Times.Never);
         }
     }
+    
 
 }
