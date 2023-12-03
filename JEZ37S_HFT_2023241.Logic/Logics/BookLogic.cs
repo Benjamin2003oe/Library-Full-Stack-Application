@@ -53,7 +53,7 @@ namespace JEZ37S_HFT_2023241.Logic.Logics
         {
             this.repo.Update(item);
         }
-
+        //This method can tell you when was the author of the chosen book born
         public IEnumerable<AuthorsBornYear> WhenWasTheAuthorBorn(string bookname)
         {
             return ReadAll()
@@ -65,6 +65,7 @@ namespace JEZ37S_HFT_2023241.Logic.Logics
 
                 });
         }
+        //This method can tell you who reserved the chosen book
         public IEnumerable<WhoReservedThisBook> Reservedby(string bookname)
         {
             return ReadAll()
