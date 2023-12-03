@@ -53,6 +53,7 @@ namespace JEZ37S_HFT_2023241.Logic.Logics
         {
             this.repo.Update(item);
         }
+        //This method can tell you how many books has been reserved by a person by typing in the name of a person
         public IEnumerable<BooksReservedby> HowManyBooksHasBeenReserved(string membername)
         {
             return ReadAll()
