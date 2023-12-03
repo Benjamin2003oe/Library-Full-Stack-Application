@@ -54,7 +54,7 @@ namespace JEZ37S_HFT_2023241.Logic.Logics
         {
             this.repo.Update(item);
         }
-
+        //This method can tell you the name of the books written by a chosen author
         public IEnumerable<BooksWrittenbyAuthor> GetAuthorBooks(string author)
         {
             return ReadAll()
