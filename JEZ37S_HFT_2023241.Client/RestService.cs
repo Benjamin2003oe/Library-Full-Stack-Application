@@ -70,7 +70,7 @@ namespace JEZ37S_HFT_2023241.Client
             }
             return items;
         }
-
+        //Needed to duplicate List<T> Get<T> method for the console version of nun-cruds
         public List<T> Get<T>(string str, string endpoint)
         {
             List<T> items = new List<T>();

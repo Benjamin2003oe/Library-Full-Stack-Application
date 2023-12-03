@@ -38,6 +38,11 @@ namespace JEZ37S_HFT_2023241.Repository.DataBase
             .OnDelete(DeleteBehavior.Cascade));
             modelBuilder.Entity<Book>().HasData(new Book[]
             {
+                //First Id: BookId
+                //Second Id: CategoryId
+                //Third Id: ReservationId
+                //Fourth Id: AuthorId
+
                 new Book(1,1,1,1,"A holló",1845),
                 new Book(2,2,2,2,"A lány a vonaton",2015),
                 new Book(3,3,3,3,"Az Alapítvány",1951),
