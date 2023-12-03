@@ -33,7 +33,7 @@ namespace JEZ37S_HFT_2023241.Models
         {
             Books = new HashSet<Book>();
         }
-
+        //Non-Crud Class
         public class HowManyBooksPerCategory
         {
             public HowManyBooksPerCategory()

@@ -51,7 +51,7 @@ namespace JEZ37S_HFT_2023241.Models
         {
 
         }
-
+        //Non-Crud Class
         public class WhoReservedThisBook
         {
             public WhoReservedThisBook()
@@ -82,7 +82,7 @@ namespace JEZ37S_HFT_2023241.Models
                 return HashCode.Combine(this.membername);
             }
         }
-
+        //Non-Crud Class
         public class AuthorsBornYear
         {
             public AuthorsBornYear()

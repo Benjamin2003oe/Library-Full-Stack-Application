@@ -22,7 +22,7 @@ namespace JEZ37S_HFT_2023241.Models
         [NotMapped]
         [JsonIgnore]
         public virtual ICollection<Book> Books { get; set; }
-
+        //Non-Crud Class
         public class BooksWrittenbyAuthor
         {
             public BooksWrittenbyAuthor()
