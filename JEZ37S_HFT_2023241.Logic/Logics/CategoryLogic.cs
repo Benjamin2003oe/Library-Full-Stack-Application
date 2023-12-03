@@ -53,7 +53,7 @@ namespace JEZ37S_HFT_2023241.Logic.Logics
         {
             this.repo.Update(item);
         }
-
+        //This method can count the number of books per category by typing in a category name
         public IEnumerable<HowManyBooksPerCategory> CountBooksPerCategory(string category)
         {
             return ReadAll()
