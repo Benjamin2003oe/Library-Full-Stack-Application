@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JEZ37S_HFT_2023241.Endpoint.Services;
 using JEZ37S_HFT_2023241.Logic.Interfaces;
 using JEZ37S_HFT_2023241.Logic.Logics;
 using JEZ37S_HFT_2023241.Models;
@@ -46,6 +47,8 @@ namespace JEZ37S_HFT_2023241.Endpoint
             services.AddTransient<ICategoryLogic, CategoryLogic>();
             services.AddTransient<IReservationLogic, ReservationLogic>();
 
+            services.AddSignalR();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -79,6 +82,7 @@ namespace JEZ37S_HFT_2023241.Endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }

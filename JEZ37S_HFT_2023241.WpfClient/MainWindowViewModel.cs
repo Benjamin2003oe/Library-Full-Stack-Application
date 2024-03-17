@@ -32,7 +32,6 @@ namespace JEZ37S_HFT_2023241.WpfClient
                     };
                     OnPropertyChanged();
                     (DeleteBookCommand as RelayCommand).NotifyCanExecuteChanged();
-                    //Nem updatelodik vmiert
                 }
             }
         }
@@ -44,18 +43,18 @@ namespace JEZ37S_HFT_2023241.WpfClient
 
         public MainWindowViewModel()
         {
-            Books = new RestCollection<Book>("http://localhost:13009/", "book");
+            Books = new RestCollection<Book>("http://localhost:13009/", "book", "hub");
             CreateBookCommand = new RelayCommand(() =>
             {
                 Books.Add(new Book()
                 {
-                    Name = "Jóskönyv"
+                    Name = SelectedBook.Name
                 });
             });
 
             UpdateBookCommand = new RelayCommand(() =>
             {
-
+                Books.Update(SelectedBook);
             });
 
             DeleteBookCommand = new RelayCommand(() =>
@@ -66,6 +65,7 @@ namespace JEZ37S_HFT_2023241.WpfClient
             {
                 return  SelectedBook != null;
             });
+            SelectedBook = new Book();
         }
     }
 }

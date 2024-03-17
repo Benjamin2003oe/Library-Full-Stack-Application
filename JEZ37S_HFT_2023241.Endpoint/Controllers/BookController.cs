@@ -1,6 +1,9 @@
-﻿using JEZ37S_HFT_2023241.Logic.Interfaces;
+﻿using JEZ37S_HFT_2023241.Endpoint.Services;
+using JEZ37S_HFT_2023241.Logic.Interfaces;
 using JEZ37S_HFT_2023241.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using static JEZ37S_HFT_2023241.Models.Book;
 
@@ -12,10 +15,12 @@ namespace JEZ37S_HFT_2023241.Endpoint.Controllers
     {
 
         IBookLogic Logic;
+        IHubContext<SignalRHub> hub;
 
-        public BookController(IBookLogic logic)
+        public BookController(IBookLogic logic, IHubContext<SignalRHub> hub)
         {
             Logic = logic;
+            this.hub = hub;
         }
 
         [HttpGet]
@@ -34,18 +39,24 @@ namespace JEZ37S_HFT_2023241.Endpoint.Controllers
         public void Create([FromBody] Book value)
         {
             this.Logic.Create(value);
+            this.hub.Clients.All.SendAsync("BookCreated", value);
         }
 
         [HttpPut]
         public void Update([FromBody] Book value)
         {
             this.Logic.Update(value);
+            this.hub.Clients.All.SendAsync("BookUpdated", value);
+
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var actorToDelete = this.Logic.Read(id);
             this.Logic.Delete(id);
+            this.hub.Clients.All.SendAsync("BookDeleted", actorToDelete);
+
         }
 
     }
