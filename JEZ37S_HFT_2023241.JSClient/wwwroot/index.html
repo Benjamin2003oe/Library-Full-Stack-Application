@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Actor UI</title>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <h1>Actor Catalog</h1>
@@ -11,6 +11,12 @@
         <label>Book Name</label>
         <input type="text" id="bookname" />
         <button type="button" onclick="create()">Add Book</button>
+    </div>
+
+    <div id="updateformdiv">
+        <label>Book Name</label>
+        <input type="text" id="booknametoupdate" />
+        <button type="button" onclick="update()">Update Book</button>
     </div>
     <table>
         <thead>
@@ -23,6 +29,8 @@
         <tbody id="resultarea">
         </tbody>
     </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
