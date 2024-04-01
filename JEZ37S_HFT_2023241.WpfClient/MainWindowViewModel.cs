@@ -15,6 +15,7 @@ namespace JEZ37S_HFT_2023241.WpfClient
 {
     public class MainWindowViewModel: ObservableRecipient
     {
+        #region Books
         public RestCollection<Book> Books { get; set; }
         private Book selectedBook;
 
@@ -40,9 +41,65 @@ namespace JEZ37S_HFT_2023241.WpfClient
         public ICommand DeleteBookCommand { get; set; }
         public ICommand UpdateBookCommand { get; set; }
 
+        #endregion 
+        #region Authors
+        public RestCollection<Author> Authors { get; set; }
+        private Author selectedAuthor;
 
+        public Author SelectedAuthor
+        {
+            get { return selectedAuthor; }
+            set
+            {
+                if (value != null)
+                {
+                    selectedAuthor = new Author()
+                    {
+                        Name = value.Name,
+                        Id = value.Id,
+                    };
+                    OnPropertyChanged();
+                    (DeleteAuthorCommand as RelayCommand).NotifyCanExecuteChanged();
+                }
+            }
+        }
+
+        public ICommand CreateAuthorCommand { get; set; }
+        public ICommand DeleteAuthorCommand { get; set; }
+        public ICommand UpdateAuthorCommand { get; set; }
+
+        #endregion 
+        #region Category
+        public RestCollection<Category> Categories { get; set; }
+        private Category selectedCategory;
+
+        public Category SelectedCategory
+        {
+            get { return selectedCategory; }
+            set
+            {
+                if (value != null)
+                {
+                    selectedCategory = new Category()
+                    {
+                        Category_Name = value.Category_Name,
+                        Id = value.Id,
+                    };
+                    OnPropertyChanged();
+                    (DeleteCategoryCommand as RelayCommand).NotifyCanExecuteChanged();
+                }
+            }
+        }
+
+        public ICommand CreateCategoryCommand { get; set; }
+        public ICommand DeleteCategoryCommand { get; set; }
+        public ICommand UpdateCategoryCommand { get; set; }
+
+        #endregion 
+        
         public MainWindowViewModel()
         {
+            #region Books
             Books = new RestCollection<Book>("http://localhost:13009/", "book", "hub");
             CreateBookCommand = new RelayCommand(() =>
             {
@@ -66,6 +123,57 @@ namespace JEZ37S_HFT_2023241.WpfClient
                 return  SelectedBook != null;
             });
             SelectedBook = new Book();
+            #endregion
+            #region Authors
+            Authors = new RestCollection<Author>("http://localhost:13009/", "author", "hub");
+            CreateAuthorCommand = new RelayCommand(() =>
+            {
+                Authors.Add(new Author()
+                {
+                    Name = SelectedAuthor.Name
+                });
+            });
+
+            UpdateAuthorCommand = new RelayCommand(() =>
+            {
+                Authors.Update(SelectedAuthor);
+            });
+
+            DeleteAuthorCommand = new RelayCommand(() =>
+            {
+                Authors.Delete(SelectedAuthor.Id);
+            },
+            () =>
+            {
+                return SelectedAuthor != null;
+            });
+            SelectedAuthor = new Author();
+            #endregion
+            #region Categories
+            Categories = new RestCollection<Category>("http://localhost:13009/", "category", "hub");
+            CreateCategoryCommand = new RelayCommand(() =>
+            {
+                Categories.Add(new Category()
+                {
+                    Category_Name = SelectedCategory.Category_Name
+                });
+            });
+
+            UpdateCategoryCommand = new RelayCommand(() =>
+            {
+                Categories.Update(SelectedCategory);
+            });
+
+            DeleteCategoryCommand = new RelayCommand(() =>
+            {
+                Categories.Delete(SelectedCategory.Id);
+            },
+            () =>
+            {
+                return SelectedCategory != null;
+            });
+            SelectedCategory = new Category();
+            #endregion               
         }
     }
 }

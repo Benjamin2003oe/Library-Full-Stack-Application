@@ -10,23 +10,73 @@
         <local:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <ListBox ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Label Content="{Binding Name}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <StackPanel Grid.Column="1">
-            <Label Content="Name" Background="LightBlue" Padding="10" />
-            <TextBox Text="{Binding SelectedBook.Name}" Padding="10" Margin="0,0,0,30"/> 
-            <Button Content="Create Book" Command="{Binding CreateBookCommand}" Margin="10" Padding="10" />
-            <Button Content="Delete Book" Command="{Binding DeleteBookCommand}" Margin="10" Padding="10" />
-            <Button Content="Update Book" Command="{Binding UpdateBookCommand}" Margin="10" Padding="10" />
-        </StackPanel>
+        <TabControl>
+            <TabItem Header="Books" Background="LightBlue">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Name}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Name" Background="LightBlue" Padding="10" />
+                        <TextBox Text="{Binding SelectedBook.Name}" Padding="10" Margin="0,0,0,30"/>
+                        <Button Content="Create Book" Command="{Binding CreateBookCommand}" Margin="10" Padding="10" />
+                        <Button Content="Delete Book" Command="{Binding DeleteBookCommand}" Margin="10" Padding="10" />
+                        <Button Content="Update Book" Command="{Binding UpdateBookCommand}" Margin="10" Padding="10" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Authors" Background="GreenYellow">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox ItemsSource="{Binding Authors}" SelectedItem="{Binding SelectedAuthor}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Name}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Name" Background="LightBlue" Padding="10" />
+                        <TextBox Text="{Binding SelectedAuthor.Name}" Padding="10" Margin="0,0,0,30"/>
+                        <Button Content="Create Author" Command="{Binding CreateAuthorCommand}" Margin="10" Padding="10" />
+                        <Button Content="Delete Author" Command="{Binding DeleteAuthorCommand}" Margin="10" Padding="10" />
+                        <Button Content="Update Author" Command="{Binding UpdateAuthorCommand}" Margin="10" Padding="10" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Categories" Background="IndianRed">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Category_Name}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Name" Background="LightBlue" Padding="10" />
+                        <TextBox Text="{Binding SelectedCategory.Category_Name}" Padding="10" Margin="0,0,0,30"/>
+                        <Button Content="Create Category" Command="{Binding CreateCategoryCommand}" Margin="10" Padding="10" />
+                        <Button Content="Delete Category" Command="{Binding DeleteCategoryCommand}" Margin="10" Padding="10" />
+                        <Button Content="Update Category" Command="{Binding UpdateCategoryCommand}" Margin="10" Padding="10" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
