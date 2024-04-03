@@ -1,7 +1,7 @@
-﻿let books = [];
+﻿let authors = [];
 let connection = null;
 
-let bookIdtoUpdate = -1;
+let authorIdtoUpdate = -1;
 
 getData();
 setupSignalR();
@@ -12,15 +12,15 @@ function setupSignalR() {
         .configureLogging(signalR.LogLevel.Information)
         .build();
 
-    connection.on("BookCreated", (user, message) => {
+    connection.on("AuthorCreated", (user, message) => {
         getData();
     });
 
-    connection.on("BookDeleted", (user, message) => {
+    connection.on("AuthorDeleted", (user, message) => {
         getData();
     });
 
-    connection.on("BookUpdated", (user, message) => {
+    connection.on("AuthorUpdated", (user, message) => {
         getData();
     });
 
@@ -43,32 +43,33 @@ async function start() {
 };
 
 async function getData() {
-    await fetch('http://localhost:13009/book')
+    await fetch('http://localhost:13009/author')
         .then(x => x.json())
         .then(y => {
-            books = y;
-            //console.log(books);
+            authors = y;
+            //console.log(authors);
             display();
         });
 }
 
 function display() {
     document.getElementById('resultarea').innerHTML = "";
-    books.forEach(t => {
+    authors.forEach(t => {
         document.getElementById('resultarea').innerHTML +=
             "<tr><td>" + t.id + "</td><td>"
-        + t.name + "</td><td>" +
-        `<button type="button" onclick="remove(${t.id})">Delete</button>` +
-        `<button type="button" onclick="showupdate(${t.id})">Update</button>`
+            + t.name + "</td><td>" +
+            `<button type="button" onclick="remove(${t.id})">Delete</button>` +
+            `<button type="button" onclick="showupdate(${t.id})">Update</button>`
             + "</td></tr>";
     });
 }
 
-function remove(id){
-    fetch('http://localhost:13009/book/' + id, {
+function remove(id) {
+    fetch('http://localhost:13009/author/' + id, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json', },
-        body: null })
+        body: null
+    })
         .then(response => response)
         .then(data => {
             console.log('Success:', data);
@@ -78,19 +79,19 @@ function remove(id){
 }
 
 function showupdate(id) {
-    document.getElementById('booknametoupdate').value = books.find(t => t['id'] == id)['name']; 
+    document.getElementById('authornametoupdate').value = authors.find(t => t['id'] == id)['name'];
     document.getElementById('updateformdiv').style.display = 'flex';
-    bookIdtoUpdate = id;
+    authorIdtoUpdate = id;
 }
 
 function update() {
     document.getElementById('updateformdiv').style.display = 'none';
-    let gottenName = document.getElementById('booknametoupdate').value;
-    fetch('http://localhost:13009/book', {
+    let gottenName = document.getElementById('authornametoupdate').value;
+    fetch('http://localhost:13009/author', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(
-            { name: gottenName, Id: bookIdtoUpdate }),
+            { name: gottenName, Id: authorIdtoUpdate }),
     })
         .then(response => response)
         .then(data => {
@@ -101,15 +102,15 @@ function update() {
 }
 
 function create() {
-    let gottenName = document.getElementById('bookname').value;
-    fetch('http://localhost:13009/book', {
+    let gottenName = document.getElementById('authorname').value;
+    fetch('http://localhost:13009/author', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json',},
+        headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(
-            { name: gottenName }),})
+            { name: gottenName }),
+    })
         .then(response => response)
-        .then(data =>
-        {
+        .then(data => {
             console.log('Success:', data);
             getData();
         })
