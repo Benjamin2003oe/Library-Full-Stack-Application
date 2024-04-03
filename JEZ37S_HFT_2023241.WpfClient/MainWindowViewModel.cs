@@ -19,7 +19,14 @@ namespace JEZ37S_HFT_2023241.WpfClient
 {
     public class MainWindowViewModel: ObservableRecipient
     {
+        private string errorMessage;
         static RestService r;
+
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set { SetProperty(ref errorMessage, value); }
+        }
         #region Books
         public RestCollection<Book> Books { get; set; }
         private Book selectedBook;

@@ -77,7 +77,134 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            
+            <TabItem Header="NONCRUDS" Background="LightYellow" Height="22" Margin="-2,0,-2,0" VerticalAlignment="Bottom">
+                <TabControl>
+                    <TabItem Header="BooksWrittenbyAuthor" Background="LightBlue">
+                        <Grid>
+                            <StackPanel Grid.Column="1">
+                                <Label Content="BooksWrittenbyAuthor" Padding="10" FontWeight="Bold" FontSize="20"
+                            HorizontalAlignment="Center" Margin="0,0,0,15"></Label>
+                                <Label Content="Select an Author" Background="LightBlue" Padding="10" />
+                                <ListBox ItemsSource="{Binding Authors}" SelectedItem="{Binding SelectedAuthor}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Button Content="Run" Command="{Binding Author1Command}" Padding="10" />
+                                <Label Content="{Binding ErrorMessage}" FontSize="18" Foreground="Red" HorizontalContentAlignment="Center" Margin="0,0,0,10" />
+                                <ListBox ItemsSource="{Binding Author1ObservableCollection}" Height="200">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label>
+                                                <Label.Content>
+                                                    <TextBlock>
+                                            <Run Text="{Binding name}" />
+                                                    </TextBlock>
+                                                </Label.Content>
+                                            </Label>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="AuthorsBornYear" Background="LightGreen">
+                        <Grid>
+                            <StackPanel Grid.Column="1">
+                                <Label Content="AuthorsBornYear" Padding="10" FontWeight="Bold" FontSize="20"
+                        HorizontalAlignment="Center" Margin="0,0,0,15"></Label>
+                                <Label Content="Select a Book" Background="LightBlue" Padding="10" />
+                                <ListBox ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Button Content="Run" Command="{Binding Book1Command}" Padding="10" />
+                                <Label Content="{Binding ErrorMessage}" FontSize="18" Foreground="Red" HorizontalContentAlignment="Center" Margin="0,0,0,10" />
+                                <ListBox ItemsSource="{Binding Book1ObservableCollection}" Height="200">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label>
+                                                <Label.Content>
+                                                    <TextBlock>
+                                        <Run Text="{Binding year}" />
+                                                    </TextBlock>
+                                                </Label.Content>
+                                            </Label>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="WhoReservedThisBook" Background="LightPink">
+                        <Grid>
+                            <StackPanel Grid.Column="1">
+                                <Label Content="WhoReservedThisBook" Padding="10" FontWeight="Bold" FontSize="20"
+                        HorizontalAlignment="Center" Margin="0,0,0,15"></Label>
+                                <Label Content="Select a Book" Background="LightBlue" Padding="10" />
+                                <ListBox ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Button Content="Run" Command="{Binding Book2Command}" Padding="10" />
+                                <Label Content="{Binding ErrorMessage}" FontSize="18" Foreground="Red" HorizontalContentAlignment="Center" Margin="0,0,0,10" />
+                                <ListBox ItemsSource="{Binding Book2ObservableCollection}" Height="200">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label>
+                                                <Label.Content>
+                                                    <TextBlock>
+                                            <Run Text="{Binding membername}" />
+                                                    </TextBlock>
+                                                </Label.Content>
+                                            </Label>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="HowManyBooksPerCategory" Background="LightSalmon">
+                        <Grid>
+                            <StackPanel Grid.Column="1">
+                                <Label Content="HowManyBooksPerCategory" Padding="10" FontWeight="Bold" FontSize="20"
+                           HorizontalAlignment="Center" Margin="0, 0, 0, 15"></Label>
+                                <Label Content="Select a Category" Background="LightPink" Padding="10"/>
+                                <ListBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Category_Name}"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <Button Content="Run" Command="{Binding Category1Command}" Padding="10"/>
+                                <Label Content="{Binding ErrorMessage}" FontSize="18" Foreground="Red" HorizontalContentAlignment="Center" Margin="0,0,0,10"/>
+                                <ListBox ItemsSource="{Binding Category1ObservableCollection}" Height="200">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label>
+                                                <Label.Content>
+                                                    <TextBlock>
+                                            <Run Text="{Binding name}"/>
+                                                    </TextBlock>
+                                                </Label.Content>
+                                            </Label>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
