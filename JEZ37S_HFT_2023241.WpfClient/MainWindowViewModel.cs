@@ -19,6 +19,7 @@ namespace JEZ37S_HFT_2023241.WpfClient
 {
     public class MainWindowViewModel: ObservableRecipient
     {
+        static RestService r;
         #region Books
         public RestCollection<Book> Books { get; set; }
         private Book selectedBook;
@@ -119,7 +120,7 @@ namespace JEZ37S_HFT_2023241.WpfClient
 
         //Category
         public List<HowManyBooksPerCategory> Category1Collection { get; set; }
-        public ObservableCollection<HowManyBooksPerCategory> Cattegory1ObservableCollection { get; set; }
+        public ObservableCollection<HowManyBooksPerCategory> Category1ObservableCollection { get; set; }
         #endregion
 
 
@@ -201,6 +202,55 @@ namespace JEZ37S_HFT_2023241.WpfClient
             SelectedCategory = new Category();
             #endregion
             #region NONCRUDS
+            r = new RestService("http://localhost:13009/");
+
+            Author1ObservableCollection = new ObservableCollection<BooksWrittenbyAuthor>();
+            Author1Command = new RelayCommand(() =>
+            {
+                Author1ObservableCollection.Clear();
+                string authortname = SelectedAuthor.Name;
+                Author1Collection = r.Get<BooksWrittenbyAuthor>(authortname, "/Stat/GetAuthorBooks");
+                foreach (var item in Author1Collection)
+                {
+                    Author1ObservableCollection.Add(item);
+                }
+            });
+
+            Book1ObservableCollection = new ObservableCollection<AuthorsBornYear>();
+            Book1Command = new RelayCommand(() =>
+            {
+                Book1ObservableCollection.Clear();
+                string bookname = SelectedBook.Name;
+                Book1Collection = r.Get<AuthorsBornYear>(bookname, "Stat/WhenWasTheAuthorBorn");
+                foreach (var item in Book1Collection)
+                {
+                    Book1ObservableCollection.Add(item);
+                }
+            });
+
+            Book2ObservableCollection = new ObservableCollection<WhoReservedThisBook>();
+            Book2Command = new RelayCommand(() =>
+            {
+                Book2ObservableCollection.Clear();
+                string bookname = SelectedBook.Name;
+                Book2Collection = r.Get<WhoReservedThisBook>(bookname, "/Stat/Reservedby");
+                foreach (var item in Book2Collection)
+                {
+                    Book2ObservableCollection.Add(item);
+                }
+            });
+
+            Category1ObservableCollection = new ObservableCollection<HowManyBooksPerCategory>();
+            Category1Command = new RelayCommand(() =>
+            {
+                Category1ObservableCollection.Clear();
+                string categoryname = SelectedCategory.Category_Name;
+                Category1Collection = r.Get<HowManyBooksPerCategory>(categoryname, "/Stat/CountBooksPerCategory");
+                foreach (var item in Category1Collection)
+                {
+                    Category1ObservableCollection.Add(item);
+                }
+            });
             #endregion
         }
     }

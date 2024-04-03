@@ -17,6 +17,23 @@ namespace JEZ37S_HFT_2023241.WpfClient
     {
         HttpClient client;
 
+        //own restcollection 
+        public List<T> Get<T>(string text, string endpoint)
+        {
+            List<T> items = new List<T>();
+            HttpResponseMessage response = client.GetAsync(endpoint + "/" + text).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                items = response.Content.ReadAsAsync<List<T>>().GetAwaiter().GetResult();
+            }
+            else
+            {
+                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                throw new ArgumentException(error.Msg);
+            }
+            return items;
+        }
+
         public RestService(string baseurl, string pingableEndpoint = "swagger")
         {
             bool isOk = false;
