@@ -3,6 +3,7 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using static JEZ37S_HFT_2023241.Models.Author;
+using static JEZ37S_HFT_2023241.Models.Book;
+using static JEZ37S_HFT_2023241.Models.Category;
 
 namespace JEZ37S_HFT_2023241.WpfClient
 {
@@ -95,8 +99,30 @@ namespace JEZ37S_HFT_2023241.WpfClient
         public ICommand DeleteCategoryCommand { get; set; }
         public ICommand UpdateCategoryCommand { get; set; }
 
-        #endregion 
-        
+        #endregion
+        #region NONCRUDS
+        public ICommand Author1Command { get; set; }
+        public ICommand Book1Command { get; set; }
+        public ICommand Book2Command { get; set; }
+        public ICommand Category1Command { get; set; }
+
+        //Author
+        public List<BooksWrittenbyAuthor> Author1Collection { get; set; }
+        public ObservableCollection<BooksWrittenbyAuthor> Author1ObservableCollection { get; set; }
+
+        //Book
+        public List<AuthorsBornYear> Book1Collection { get; set; }
+        public ObservableCollection<AuthorsBornYear> Book1ObservableCollection { get; set; }
+ 
+        public List<WhoReservedThisBook> Book2Collection { get; set; }
+        public ObservableCollection<WhoReservedThisBook> Book2ObservableCollection { get; set; }
+
+        //Category
+        public List<HowManyBooksPerCategory> Category1Collection { get; set; }
+        public ObservableCollection<HowManyBooksPerCategory> Cattegory1ObservableCollection { get; set; }
+        #endregion
+
+
         public MainWindowViewModel()
         {
             #region Books
@@ -173,7 +199,9 @@ namespace JEZ37S_HFT_2023241.WpfClient
                 return SelectedCategory != null;
             });
             SelectedCategory = new Category();
-            #endregion               
+            #endregion
+            #region NONCRUDS
+            #endregion
         }
     }
 }
