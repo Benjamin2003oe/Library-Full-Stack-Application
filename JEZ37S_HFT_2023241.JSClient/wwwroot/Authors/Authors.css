@@ -1,55 +1,75 @@
-﻿table {
-    width: 100%;
+﻿body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
 }
 
-table, th, td {
-    border: 1px solid black;
+h1 {
+    text-align: center;
 }
 
-table {
-    border-collapse: collapse;
-}
-
-td, td {
-    padding: 5px;
-}
-
-th {
-    background-color: lightblue;
+#formdiv,
+#updateformdiv {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #updateformdiv {
     display: none;
-    flex-direction: column;
-    margin-bottom: 20px;
 }
 
-    #updateformdiv label, button, input {
-        margin: 10px;
-        padding: 7px;
-    }
-
-    #updateformdiv label {
-        font-weight: bolder;
-    }
-
-#formdiv {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+label {
+    display: block;
+    margin-bottom: 10px;
 }
 
-    #formdiv label, button, input {
-        margin: 10px;
-        padding: 7px;
-    }
-
-    #formdiv label {
-        font-weight: bolder;
-    }
-
-table button {
+input[type="text"],
+button {
+    width: 100%;
     padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
-body {
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+table {
+    background-color: #fff;
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
